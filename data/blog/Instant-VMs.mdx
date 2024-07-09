@@ -1,0 +1,73 @@
+---
+title: 'Introducing Instant VMs'
+date: 'Monday, July 7, 2024'
+lastmod: '2024-07-07'
+tags: ['feature']
+draft: false
+summary: 'You can now deploy a VM of your choice within seconds.'
+images: ['/static/images/canada/mountains.jpg', '/static/images/canada/toronto.jpg']
+authors: ['nathan']
+---
+
+![TensorDock](/static/images/futuristicTee.png)
+
+**Select from our most popular VM configurations and deploy within seconds. TensorDock Instant Virtual Machines are meant to simplify
+development, while saving a bit of money for users.**
+
+<TOCInline toc={props.toc}/>
+
+## Deploying Made Easier
+
+We designed Instant VMs to maxamize speed and reliability. Here's rundown on how we made it happen:
+
+- **Unmatched Speeds:** Instant VMs let you bypass a majority of the traditional deployment process. Rather than starting from
+scratch each time you hit deploy, we'll keep a couple of your favorite set-ups ready for you on hostnodes around the world. When 
+you're ready to start, we can get you access within seconds.
+
+- **Uncompromised Customizability:** We're keeping what makes Virtual Machines great, while cutting out the fluff. Instant VM
+deployments will still work with virtualy any Cloud-init script. We've designed an abridged cloud-init runtime to allow for quick
+customization while avoiding a lengthy reboot. 
+
+- **Unrivaled Reliability:** We deal with problems on deployment so that you don't have to. The hardware and software of each
+Instant VM on your dashboard has already been tested and is ready to go. 
+
+![H100](/static/images/h100.jpeg)
+
+## API 
+
+We've set up two new API endpoints to make Instant VMs easy to use in your projects. The [first](https://documenter.getpostman.com/view/20973002/2s8YzMYRDc#9a0c6985-1e5a-4a0a-ba6f-cec29312f85e) will gives information on all
+avaliable instant VMs. 
+
+```
+curl --location 'https://marketplace.tensordock.com/api/v0/client/deploy/instantvms'
+```
+The [second](https://documenter.getpostman.com/view/20973002/2s8YzMYRDc#5ed7c116-35db-4966-8cf0-19d615638550) endpoint allows you to specify an instant VM that you want to deploy. 
+You can customize the name, password, and cloud-init.
+```
+curl --location --request GET 'https://marketplace.tensordock.com/api/v0/client/deployinstant/single' \
+--data-urlencode 'api_key=' \
+--data-urlencode 'api_token=' \
+--data-urlencode 'instance_uuid=5255d6ed-adaf-4356-90a9-d3b766dfc471' \
+--data-urlencode 'name=My RTX 4000 Server' \
+--data-urlencode 'password=superC0mplexPassword' \
+--data-urlencode 'ssh_key=ssh-rsa AAAXB3NzaC1yc2EAAAADAQABAAABAQDFtMHOaiM9LlNlG6lrtrF+....' \
+--data-urlencode 'cloudinit_script=write_files:\n  - path: /home/user/cloudinit_website/index.html\n    permissions: '\''0777'\''\n    content: |\n      Woohoo! This site is working!\n    owner: user:user \nruncmd:\n  - docker run -d --restart unless-stopped --stop-timeout 300 -v /home/user/cloudinit_website:/usr/share/nginx/html:ro -p 80:80 --name default_container nginx
+'
+```
+
+## Get Started
+
+Have an instant [instant VM](https://dashboard.tensordock.com/deploy_preconfig) up and running with just a couple clicks. At the moment we only offer
+two configurations, but more are on the way:
+
+| GPU Model       | GPU Count | RAM    | Storage           | CPU cores |
+|-----------------|-----------|--------|-------------------|-----------|
+| H100 SXM5 80 GB | 1         | 112 GB | 12000 GB NVMe SSD | 22 vCPUs  |
+| H100 SXM5 80 GB | 8         | 906 GB | 1500 GB NVMe SSD  | 208 vCPUs |
+|                 |           |        |                   |           |
+
+All of our preconfigured VMs run on Ubuntu 22.04 LTS.
+
+
+
+
