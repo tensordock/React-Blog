@@ -3,89 +3,84 @@ import Tag from '@/components/Tag'
 import siteMetadata from '@/data/siteMetadata'
 import { formatDate } from 'pliny/utils/formatDate'
 import NewsletterForm from 'pliny/ui/NewsletterForm'
+import Typewriter from '@/components/typewriter'
 
 const MAX_DISPLAY = 5
 
 export default function Home({ posts }) {
   return (
     <>
-      <div className="divide-y divide-gray-200 dark:divide-gray-700">
-        <div className="space-y-2 pb-8 pt-6 md:space-y-5">
-          <h1 className="text-3xl font-extrabold leading-9 tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-6xl md:leading-14">
-            Latest
-          </h1>
-          <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
-            {siteMetadata.description}
-          </p>
+      <div className="relative min-h-screen">
+        {/* <div className="absolute left-0 top-[-5rem] z-0 h-full w-[calc(4rem)] rounded-xl bg-gray-200 dark:bg-gray-700"></div>
+        <div className="absolute left-[40rem] top-[-5rem] z-0 h-full w-[calc(4rem)] rounded-xl bg-gray-200 dark:bg-gray-700"></div> */}
+
+        <div className="relative divide-y divide-gray-200 dark:divide-gray-700"></div>
+        <div className="-ml-60 mt-32 space-y-2 pb-12 pt-3 md:space-y-20">
+          <div className="relative">
+            <div className="h-11/12 absolute inset-0 z-0 -ml-6 w-11/12 rounded-xl bg-green-300 dark:bg-green-700"></div>
+            <h1 className="relative text-3xl font-extrabold leading-9 tracking-tight text-gray-700 dark:text-gray-100 sm:text-6xl sm:leading-10 md:text-8xl md:leading-14">
+              <Typewriter key="title1" text="The Cloud for AI" typingSpeed={70} />
+              <br /> <br />
+              <Typewriter key="title2" text="and everything else." typingSpeed={65} />
+            </h1>
+            <div className="relative mt-6">
+              <p className="text-lg leading-7 text-gray-500 dark:text-gray-400">
+                {siteMetadata.description}
+              </p>
+            </div>
+          </div>
         </div>
-        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+
+        <ul
+          className="relative divide-y divide-gray-200 dark:divide-gray-700"
+          style={{ marginLeft: '-1.8rem' }}
+        >
           {!posts.length && 'No posts found.'}
           {posts.slice(0, MAX_DISPLAY).map((post) => {
             const { slug, date, title, summary, tags } = post
             return (
-              <li key={slug} className="py-12">
-                <article>
-                  <div className="space-y-2 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                    <dl>
-                      <dt className="sr-only">Published on</dt>
-                      <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                        <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                      </dd>
-                    </dl>
-                    <div className="space-y-5 xl:col-span-3">
-                      <div className="space-y-6">
-                        <div>
-                          <h2 className="text-2xl font-bold leading-8 tracking-tight">
-                            <Link
-                              href={`/blog/${slug}`}
-                              className="text-gray-900 dark:text-gray-100"
-                            >
+              <li key={slug} className="-ml-60 py-10">
+                <Link href={`/blog/${slug}`}>
+                  <article>
+                    <div className="block w-full transform rounded-xl border-8 border-gray-100 bg-gray-100 p-16 transition-transform duration-300 hover:-translate-y-1 hover:shadow-md xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                      <dl>
+                        <dt className="sr-only">Published on</dt>
+                        <dd className="text-base font-medium leading-6 text-green-700 dark:text-gray-400">
+                          <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
+                        </dd>
+                      </dl>
+                      <div className="space-y-5 xl:col-span-3" style={{ marginLeft: '-4rem' }}>
+                        <div className="space-y-6">
+                          <div>
+                            <h2 className="text-5xl font-bold leading-8 tracking-tight text-gray-600">
                               {title}
-                            </Link>
-                          </h2>
-                          <div className="flex flex-wrap">
-                            {tags.map((tag) => (
-                              <Tag key={tag} text={tag} />
-                            ))}
+                            </h2>
+                          </div>
+                          <div className="prose max-w-none text-green-700 dark:text-gray-400">
+                            {summary}
                           </div>
                         </div>
-                        <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                          {summary}
-                        </div>
-                      </div>
-                      <div className="text-base font-medium leading-6">
-                        <Link
-                          href={`/blog/${slug}`}
-                          className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                          aria-label={`Read more: "${title}"`}
-                        >
-                          Read more &rarr;
-                        </Link>
                       </div>
                     </div>
-                  </div>
-                </article>
+                  </article>
+                </Link>
               </li>
             )
           })}
         </ul>
+
+        {posts.length > MAX_DISPLAY && (
+          <div className="flex justify-end text-base font-medium leading-6">
+            <Link
+              href="/blog"
+              className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+              aria-label="All posts"
+            >
+              All Posts &rarr;
+            </Link>
+          </div>
+        )}
       </div>
-      {posts.length > MAX_DISPLAY && (
-        <div className="flex justify-end text-base font-medium leading-6">
-          <Link
-            href="/blog"
-            className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-            aria-label="All posts"
-          >
-            All Posts &rarr;
-          </Link>
-        </div>
-      )}
-      {siteMetadata.newsletter?.provider && (
-        <div className="flex items-center justify-center pt-4">
-          <NewsletterForm />
-        </div>
-      )}
     </>
   )
 }
