@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header
       style={{ width: '100vw', marginLeft: 'calc(-50vw + 50%)' }}
-      className="flex w-screen items-center justify-between border-2 border-gray-100 bg-gray-100 px-20 py-10"
+      className="flex w-screen items-center justify-between border-2 border-gray-100  px-20 py-5"
     >
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
