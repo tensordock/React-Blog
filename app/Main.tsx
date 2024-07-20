@@ -25,7 +25,6 @@ export default function Home({ posts }) {
               <br /> <br /> <br />
               and everything else.
               <br />
-
               {/* <Typewriter key="title2" text="and everything else." typingSpeed={65} /> */}
             </h1>
             <div className="relative mt-6">
