@@ -4,7 +4,7 @@ const siteMetadata = {
   headerTitle: '',
   description:"",
   language: 'en-us',
-  theme: 'system', // system, dark or light
+  theme: 'light', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
   siteLogo: '/static/images/theBigTee.png',
   socialBanner: '/static/images/logo.png',
