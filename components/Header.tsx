@@ -10,7 +10,7 @@ const Header = () => {
   return (
     <header
       style={{ width: '100vw', marginLeft: 'calc(-50vw + 50%)' }}
-      className="flex w-screen items-center justify-between border-2 border-gray-100  px-20 py-5"
+      className="flex w-screen items-center justify-between border-2 border-white bg-white px-20 py-5"
     >
       <div>
         <Link href="/" aria-label={siteMetadata.headerTitle}>
@@ -26,7 +26,7 @@ const Header = () => {
           </div>
         </Link>
       </div>
-      <div className="flex items-center space-x-4 leading-5 sm:space-x-6">
+      <div className="flex items-center space-x-4 bg-gray-100 pb-4 pl-5 pr-5 pt-4 leading-5 sm:space-x-6">
         {headerNavLinks
           .filter((link) => link.href !== '/')
           .map((link) => (
