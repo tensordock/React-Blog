@@ -9,7 +9,7 @@ const projectsData: Project[] = [
   {
     title: 'Instant Virtual Machines',
     description: `Deploy virtual machines in seconds.`,
-    imgSrc: '/static/images/futuristicTee.png',
+    imgSrc: '/static/images/futuristicTee800.png',
     href: 'https://dashboard.tensordock.com/deploy_preconfig',
   },
 ]
