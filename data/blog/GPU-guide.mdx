@@ -1,0 +1,83 @@
+---
+title: 'Choosing the right GPU for AI'
+date: 'Tuesday, July 30, 2024'
+lastmod: '2024-07-30'
+tags: ['advice']
+draft: false
+summary: 'Your GPU can make or break your profitability. Get the most value out of your compute!'
+images:
+authors: ['allen']
+---
+
+![NVIDIA L40S GPU](/static/images/gpu-l40s.jpg)
+
+One of the most common questions we get at TensorDock is, how do I get the most value out of my GPUs?
+
+## Generally speaking...
+
+### Most Important Factors
+
+First, you need to have enough VRAM to fit your model. This should be your first consideration.
+
+Tensor Cores are used for matrix multiplication, which is vital for any AI application. These were
+introduced in professional GPUs starting with the V100 in 2017 and in consumer GPUs with the GeForce
+20 series in 2018. The vast majority of GPUs on TensorDock have Tensor Cores, so is it just a matter of how many?
+
+Actually, no. Tensor Cores are fast - so fast that they aren’t fully utilized most of the time, depending
+on batch size. So, the bottleneck is often bandwidth, both memory and interconnect (between GPUs).
+
+### FP16 vs. FP8
+
+FP8 represents numbers with 8 bits rather than 16 with the previously standard FP16. The latest GPUs,
+such as the H100 and soon the B100, support optimizations for FP8.
+
+With lower precision, models can run with lower VRAM and bandwidth, and thus less compute. However,
+you have to be careful not to significantly degrade model performance. If you’ve tested that you can
+benefit from FP8, or have reason otherwise to think so, make sure you’re getting a GPU with FP8 support.
+
+### Top Inference Picks
+
+Price to performance is generally higher with consumer cards, since there’s a clear markup for enterprise GPUs.
+Most cloud providers don’t offer consumer GPUs, but TensorDock does.
+
+If you can fit your model on a 24 GB VRAM card, then the 3090 and 4090 offer extremely high value for inference.
+Past 24 GB, you’ll be forced to go into enterprise territory, where value just doesn’t come close. If you’re not
+set on a specific model yet, making it fit within a 24 GB VRAM card would significantly cut your inference costs.
+
+Beyond that, the next bracket of value is the lower tier enterprise cards, such as the V100 32 GB, A6000 (48 GB),
+L40 (48 GB), and 6000 Ada (48 GB).
+
+Then, you finally have the A100 80 GB and H100. If you need this much performance for inference, you’ll definitely
+know it. Overall, the A100 offers better inference value, while the H100 is best suited for training.
+
+## Enterprise GPUs
+
+### Scaling compute: NVLink and InfiniBand
+
+<img src="/static/images/gpu-nvlink.jpg" width="75%" alt="NVIDIA A100 with NVLink"></img>
+
+Since GPUs have to be interconnected and limited by bandwidth, scaling a server from one GPU to eight doesn’t
+automatically achieve 8x performance. Modern GPUs support faster interconnect, so this dropoff becomes more
+dramatic with older GPUs such as the V100.
+
+On TensorDock, your VM automatically passes through NVLink interconnect when available if you rent a
+2x, 4x, or 8x H100/A100 server.
+
+While NVLink interconnects GPUs within a server, InfiniBand interconnects multiple servers together.
+Expect to see a slight premium for InfiniBand of around 5-10%. Keep in mind it’s not really necessary
+unless you’re training extremely large models.
+
+For inference, we’ve seen that running open-source models with 4 GPUs per VM and two instances running
+per 8xH100 node yields best performance, better than models running 2 GPUs or 8 GPUs. Additionally,
+we’ve seen that the throughput of TensorRT-LLM with Triton inference is around double that of vLLM.
+
+### SXM vs PCIe (H100, A100, and V100 only)
+
+<img src="/static/images/gpu-a100sxm.png" width="75%" alt="NVIDIA A100 SXM4 server"></img>
+
+SXM is a proprietary NVIDIA form factor that allows for increased power delivery, cooling, and bandwidth.
+Cloud providers who only offer PCIe often don’t specify whether their H100s are SXM or PCIe. That’s because
+PCIe has much lower performance, up to 25%! This is because the H100 PCIe has just 2 TB/s of memory bandwidth
+compared to SXM5’s 3.35 TB/s. Overall, SXM integrates GPUs within a server so closely that they can effectively
+operate as a single extremely large GPU. For the A100 and V100, there isn’t much difference in performance,
+so just go with whatever is less expensive.
