@@ -9,11 +9,9 @@ const MAX_DISPLAY = 5
 export default function Home({ posts }) {
   return (
     <>
-      <div className="mt-10 pt-20 pb-20 mb-10 text-center">
-        <h1 className="text-7xl md-5xl sm-4xl font-bold ">
-          Tensordock Blog
-        </h1>
-        <h1 className="pt-5 text-2xl sm-1xl text-gray-500">
+      <div className="mb-10 mt-10 pb-20 pt-20 text-center">
+        <h1 className="md-5xl sm-4xl text-7xl font-bold ">Tensordock Blog</h1>
+        <h1 className="sm-1xl pt-5 text-2xl text-gray-500">
           catch up on our latest products, guides and company news
         </h1>
       </div>
