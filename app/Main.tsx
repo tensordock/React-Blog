@@ -15,7 +15,6 @@ const MAX_DISPLAY = 5
 export default function Home({ posts }) {
   return (
     <>
-
       <div className="divide-y divide-gray-300 ">
         <div className="mb-10 mt-10 pb-20 pt-20 text-center">
           <h1 className="md-5xl sm-4xl text-7xl font-bold text-slate-800 ">Tensordock Blog</h1>
@@ -24,17 +23,46 @@ export default function Home({ posts }) {
           </h1>
         </div>
 
-        <div className="flex h-fit w-full p-20">
+        <div className="flex h-fit w-full flex-col p-20 md:flex-row">
+          <div className="mr-10 w-full flex-col divide-y divide-white rounded-xl shadow-xl sm:w-7/12 sm:pb-10 md:w-full md:pb-10">
+            <div className="h-2/3 w-full rounded-t-xl bg-[url('/static/images/h100.jpeg')] bg-cover bg-center bg-no-repeat"></div>
+            <div className="  h-1/3 w-full justify-center rounded-b-xl bg-white text-center text-3xl sm:text-2xl md:text-2xl">
+              <h1 className="pt-10">See how we match up with our competitors</h1>
+              <Link
+                href={`https://tensordock.com/comparison-aws`}
+                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                aria-label={`Read more:"`}
+              >
+                <h1 className="pt-10 text-green-400">Compare</h1>
+              </Link>
+            </div>
+          </div>
 
-
-
-
-          <div className="mr-10 w-7/12 rounded-xl bg-gray-700"></div>
-
-          <div className="h-fit w-5/12">
-            <div className="h-96 w-full rounded-xl bg-gray-200"></div>
-            <div className="mt-10 h-40 w-full rounded-xl bg-slate-400">
-              We've got the shit you need!! Contact us.
+          <div className="sm:5/12 h-fit w-full pt-10 sm:pt-10">
+            <div className="h-96 w-full rounded-xl bg-white pl-10 pr-10 pt-20 shadow-xl">
+              <h1 className="text-4xl sm:text-3xl">Become profitable today</h1>
+              <h1 className="pt-10">
+                We are currently looking for data-center partners that meet industry standards.
+              </h1>
+              <Link
+                href={`https://tensordock.com/host`}
+                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                aria-label={`Read more:"`}
+              >
+                <h1 className="pt-10 text-3xl text-green-400">Apply</h1>
+              </Link>
+            </div>
+            <div className="mt-10 h-40 w-full rounded-xl bg-white shadow-xl">
+              <h1 className="pl-10 pr-10 pt-5">
+                Does your business need compute? We can set you up with a custom solution.
+              </h1>
+              <Link
+                href={`https://tensordock.com/contact`}
+                className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
+                aria-label={`Read more:"`}
+              >
+                <h1 className="pl-10 pt-5 text-2xl text-green-400">Contact Sales</h1>
+              </Link>
             </div>
           </div>
         </div>
@@ -43,8 +71,8 @@ export default function Home({ posts }) {
           <h1 className="md-5xl sm-4xl text-6xl font-bold text-slate-800 ">Latest</h1>
         </div>
 
-        <div className="pb-20 mb-10">
-          <div className="mb-20 items-center justify-center h-64 w-full pt-10 pl-20 pr-20">
+        <div className="mb-20 pb-20">
+          <div className="mb-20 h-64 w-full items-center justify-center pl-20 pr-20 pt-10">
             <Carousel posts={posts} />
           </div>
         </div>
@@ -57,8 +85,8 @@ export default function Home({ posts }) {
           <h1 className="md-5xl sm-4xl text-6xl font-bold text-slate-800 ">Features</h1>
         </div>
 
-        <div className="pb-20 mb-10">
-          <div className="mb-20 items-center justify-center h-64 w-full pt-10 pl-20 pr-20">
+        <div className="mb-20 pb-20">
+          <div className="mb-20 h-64 w-full items-center justify-center pl-20 pr-20 pt-10">
             <Carousel posts={posts} />
           </div>
         </div>
@@ -67,8 +95,8 @@ export default function Home({ posts }) {
           <h1 className="md-5xl sm-4xl text-6xl font-bold text-slate-800 ">Guides</h1>
         </div>
 
-        <div className="pb-20 mb-10">
-          <div className="mb-20 items-center justify-center h-64 w-full pt-10 pl-20 pr-20">
+        <div className="mb-20 pb-20">
+          <div className="mb-20 h-64 w-full items-center justify-center pl-20 pr-20 pt-10">
             <Carousel posts={posts} />
           </div>
         </div>
@@ -78,62 +106,11 @@ export default function Home({ posts }) {
         </div>
 
         <div className="pb-20">
-          <div className="mb-20 items-center justify-center h-64 w-full pt-10 pl-20 pr-20">
+          <div className="mb-20 h-64 w-full items-center justify-center pl-20 pr-20 pt-10">
             <Carousel posts={posts} />
           </div>
         </div>
 
-
-
-        {/* <ul className="mt-10 divide-y divide-white pt-20 dark:divide-gray-700">
-          {!posts.length && 'No posts found.'}
-          {posts.slice(0, MAX_DISPLAY).map((post) => {
-            const { slug, date, title, summary, tags } = post
-            return (
-              <li key={slug} className="py-8">
-                <article>
-                  <Link
-                    href={`/blog/${slug}`}
-                    className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
-                    aria-label={`Read more: "${title}"`}
-                  >
-                    <div className="space-y-2 rounded-xl bg-gray-100 pl-10 pr-10 pt-10 hover:bg-gray-200 hover:text-green-500 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
-                      <dl>
-                        <dt className="sr-only">Published on</dt>
-                        <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                          <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                        </dd>
-                      </dl>
-                      <div className="space-y-5 xl:col-span-3">
-                        <div className="space-y-6">
-                          <div>
-                            <h2 className="pb-5 text-4xl font-bold leading-8 tracking-tight">
-                              <Link
-                                href={`/blog/${slug}`}
-                                className="text-gray-900 dark:text-gray-100"
-                              >
-                                {title}
-                              </Link>
-                            </h2>
-                            <div className="flex flex-wrap">
-                              {tags.map((tag) => (
-                                <Tag key={tag} text={tag} />
-                              ))}
-                            </div>
-                          </div>
-                          <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                            {summary}
-                          </div>
-                        </div>
-                        <div className="text-base font-medium leading-6"></div>
-                      </div>
-                    </div>
-                  </Link>
-                </article>
-              </li>
-            )
-          })}
-        </ul> */}
         {posts.length > MAX_DISPLAY && (
           <div className="flex justify-end text-base font-medium leading-6">
             <Link
