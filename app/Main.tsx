@@ -39,46 +39,13 @@ export default function Home({ posts }) {
           </div>
         </div>
 
+        <div className="mb-10 mt-10 pt-10 text-center">
+          <h1 className="md-5xl sm-4xl text-6xl font-bold text-slate-800 ">Latest</h1>
+        </div>
 
-        <div className="pb-10 pt-10">
-          <div className="flex h-96 w-full items-center justify-center divide-y divide-white">
-            {!posts.length && 'No posts found.'}
-            {posts.slice(0, MAX_DISPLAY_MID).map((post) => {
-              const { slug, date, title, summary, tags } = post
-              return (
-                <div key={slug} className="m-5 h-full w-1/4 bg-gray-100">
-
-                  <div className="m-5 flex flex-wrap">
-                    {tags.map((tag) => (
-                      <Tag key={tag} text={tag} />
-                    ))}
-                  </div>
-
-                  <dl>
-                    <dt className="sr-only">Published on</dt>
-                    <dd className="m-5 text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
-                      <time dateTime={date}>{formatDate(date, siteMetadata.locale)}</time>
-                    </dd>
-                  </dl>
-
-                  <div className="m-5 space-y-5 xl:col-span-3">
-                    <div className="space-y-6">
-                      <div>
-                        <h2 className="pt-5 pb-5 text-4xl font-bold leading-8 tracking-tight">
-                          <Link href={`/blog/${slug}`} className="text-gray-900 dark:text-gray-100">
-                            {title}
-                          </Link>
-                        </h2>
-                      </div>
-                      <div className="prose max-w-none text-gray-500 dark:text-gray-400">
-                        {summary}
-                      </div>
-                    </div>
-                    <div className="text-base font-medium leading-6"></div>
-                  </div>
-                </div>
-              )
-            })}
+        <div className="pb-20 mb-10">
+          <div className="mb-20 items-center justify-center h-64 w-full pt-10 pl-20 pr-20">
+            <Carousel posts={posts} />
           </div>
         </div>
 
@@ -92,7 +59,7 @@ export default function Home({ posts }) {
 
         <div className="pb-20 mb-10">
           <div className="mb-20 items-center justify-center h-64 w-full pt-10 pl-20 pr-20">
-            <Carousel />
+            <Carousel posts={posts} />
           </div>
         </div>
 
@@ -102,7 +69,7 @@ export default function Home({ posts }) {
 
         <div className="pb-20 mb-10">
           <div className="mb-20 items-center justify-center h-64 w-full pt-10 pl-20 pr-20">
-            <Carousel />
+            <Carousel posts={posts} />
           </div>
         </div>
 
@@ -112,7 +79,7 @@ export default function Home({ posts }) {
 
         <div className="pb-20">
           <div className="mb-20 items-center justify-center h-64 w-full pt-10 pl-20 pr-20">
-            <Carousel />
+            <Carousel posts={posts} />
           </div>
         </div>
 
