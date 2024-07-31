@@ -26,7 +26,7 @@ const Header = () => {
           </div>
         </Link>
       </div>
-      <div className="flex items-center space-x-4 bg-gray-100 pb-4 pl-5 pr-5 pt-4 leading-5 sm:space-x-6">
+      <div className="flex items-center space-x-4 bg-white pb-4 pl-5 pr-5 pt-4 leading-5 sm:space-x-6">
         {headerNavLinks
           .filter((link) => link.href !== '/')
           .map((link) => (

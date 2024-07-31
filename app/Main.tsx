@@ -9,12 +9,14 @@ const MAX_DISPLAY = 5
 export default function Home({ posts }) {
   return (
     <>
-      {/* <div className="shadow-2xl rounded-3xl bg-gradient-to-br from-green-300 via-emerald-500 to-blue-500">
-          <div className="pt-10 pb-10 flex justify-center">
-            <div className="w-10/12 h-80 bg-[url('/static/images/server-cables-cropped.png')] bg-cover bg-center">
-            </div>
-          </div>
-        </div> */}
+      <div className="mt-10 pt-20 pb-20 mb-10 text-center">
+        <h1 className="text-7xl md-5xl sm-4xl font-bold ">
+          Tensordock Blog
+        </h1>
+        <h1 className="pt-5 text-2xl sm-1xl text-gray-500">
+          catch up on our latest products, guides and company news
+        </h1>
+      </div>
       <ul className="divide-y divide-white dark:divide-gray-700">
         {!posts.length && 'No posts found.'}
         {posts.slice(0, MAX_DISPLAY).map((post) => {
@@ -27,7 +29,7 @@ export default function Home({ posts }) {
                   className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                   aria-label={`Read more: "${title}"`}
                 >
-                  <div className="space-y-2 bg-gray-100 pb-10 pl-10 pr-10 pt-10 hover:bg-gray-200 hover:text-green-500 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
+                  <div className="space-y-2 rounded-xl bg-gray-100 pb-10 pl-10 pr-10 pt-10 hover:bg-gray-200 hover:text-green-500 xl:grid xl:grid-cols-4 xl:items-baseline xl:space-y-0">
                     <dl>
                       <dt className="sr-only">Published on</dt>
                       <dd className="text-base font-medium leading-6 text-gray-500 dark:text-gray-400">
