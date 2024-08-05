@@ -1,0 +1,63 @@
+---
+title: 'YAP: Your AI Pal'
+date: 'Monday, August 5, 2024'
+lastmod: '2024-08-05'
+tags: ['feature', 'release']
+draft: false
+summary: 'Introducing our new LLM inference service.'
+images:
+authors: ['lance']
+---
+
+# YAP: Your AI Pal
+
+## Tensordock's New LLM Inference service
+
+The Tensordock team is absolutely thrilled to announce the launch of YAP, our all-new LLM inference service. With OpenAI API support, you can integrate YAP seamlessly into your Python workflows.
+
+## Using YAP
+
+To get started with YAP, simply create a new OpenAI client in your Python library, set a dummy API key (more on this later), and set `base_url` to `https://yap.tensordock.com`.
+
+For launch, YAP supports the latest Llama 3.1 8B Instruct model with a max 2048-token context length. Additional supported parameters are `max_tokens`, `temperature`, `top_p`, `frequency_penalty`, and `seed`. Note that we do not offer streaming support at the moment.
+
+Here's an example program to help you get started:
+
+```py
+"""
+An example OpenAI API client that connects to Tensordock's YAP
+"""
+from openai import OpenAI
+
+client = OpenAI(
+    api_key = "dummy",
+    base_url="https://yap.tensordock.com"
+)
+completion = client.chat.completions.create(
+    model="Meta-Llama-3.1-8B-Instruct",
+    messages=[
+        {
+            "role" : "system",
+            "content" : "You are a pirate who speaks in pirate-speak."
+        },
+        {
+            "role" : "user",
+            "content" : "Explain LLMs to me in a single sentence."
+        }
+    ],
+    max_tokens=256,
+    temperature=0.7,
+    top_p = 0.7,
+    frequency_penalty=1.0,
+    seed = 17
+)
+
+output = completion.choices[0].message.content
+print(output)
+```
+
+## Our Launch
+
+At the time of writing, YAP is provided **free of charge** to help us test our infrastructure; if you have any feedback (especially bugs), we'd love to hear from you in our [Discord server](https://discord.gg/Wrzqb4PH3t), or feel free to [email me](mailto:lance@tensordock.com). Please note that we're also running on fewer resources during our testing phase, so please be mindful of other users and limited your requests to a reasonable amount.
+
+**Happy YAPping!**
